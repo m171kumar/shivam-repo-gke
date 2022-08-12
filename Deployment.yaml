@@ -1,0 +1,23 @@
+kind: Deployment
+metadata:
+  name: hello-youtube-gke
+spec:
+ replicas: 3
+  selector:
+    matchLabels:
+      app: hello-youtube-gke
+  template:
+   metadata:
+      labels:
+        app: hello-youtube-gke
+    spec:
+      containers:
+      -name: hello-youtube-gke
+        #Replace$GCLOUD PROJECT with your project ID
+        image: gcr.io/youtube-container-demo/hello-youtube-gke:latest
+        #This app listens on port 8080 for web traffic by default.
+        ports:
+        -containerPort: 8080
+        env:
+            name: PORT
+            value: 8080
